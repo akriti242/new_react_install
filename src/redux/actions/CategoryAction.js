@@ -12,7 +12,7 @@ export const getCategory = () => async (dispatch) => {
     dispatch({
       type: ALL_CATEGORY_REQUEST,
     });
-    let link = 'https://apiexpress-fekv.onrender.com/api/getAllCategories'; //paste-here-live-link-of-getAllCategories
+    let link = 'https://kritika-api.onrender.com/api/getAllCategories'; //paste-here-live-link-of-getAllCategories
     const { data } = await axios.get(link);
     // console.log(data);
 
