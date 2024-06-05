@@ -1,7 +1,45 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { getProductDetails } from '../../redux/actions/ProductAction'
+import { addItemsToCart } from '../../redux/actions/CartAction'
+import { getProducts } from '../../redux/actions/ProductAction'
 
 function ProductDetails() {
+    const {id} = useParams()
+    // console.log(id)
+    const dispatch = useDispatch()
+    const {products} = useSelector((state)=>state.pDetail)
+    // console.log(products)
+    
+
+    // quantity function for button + -
+    const[quantity, setQuantity] = useState(1);
+
+    const increaseQty =()=>{
+        if (products.stock <= quantity) return;
+    
+        const qty = quantity + 1;
+        setQuantity(qty);
+    
+    }
+    
+    const decreaseQty =()=>{
+        if (1 >= quantity) return;
+
+        const qty = quantity - 1;
+        setQuantity(qty);
+    }
+
+    const AddToCartHandler = ()=>{
+        // alert('add to cart')
+        dispatch(addItemsToCart(id,quantity))
+    }
+    
+    useEffect(()=>{
+        dispatch(getProducts())
+        dispatch(getProductDetails(id))
+    },[dispatch])
   return (
    
     <div>
@@ -24,26 +62,32 @@ function ProductDetails() {
                 <div id="sd" className="carousel slide" data-bs-target="#sd" data-bs-ride="carousel">
                     <div className="carousel-inner">
                         <div className="carousel-item active" data-bs-interval="2000">
-                            <img className="w-100" src="image/product-1.jpg" alt=""/>
+                            <img className="w-100" src={products?.images?.url} alt=""/>
                         </div>
                         <div className="carousel-item" data-bs-interval="2000">
-                            <img className="w-100" src="image/product-2.jpg" alt=""/>
+                            <img className="w-100" src={products?.images?.url} alt=""/>
                         </div>
                         <div className="carousel-item" data-bs-interval="2000">
-                            <img className="w-100" src="image/product-3.jpg" alt=""/>
+                            <img className="w-100" src={products?.images?.url} alt=""/>
                         </div>
                     </div>
+                    <Link>
                     <a href="#sd" className="carousel-control-prev" data-bs-slide="prev">
                         <i className="fa fa-2x fa-angle-left text-dark"></i>
                     </a>
-                    <a href="#sd" className="carousel-control-next" data-bs-slide="next">
+                    </Link>
+                  
+                  <Link>
+                  <a href="#sd" className="carousel-control-next" data-bs-slide="next">
                         <i className="fa fa-2x fa-angle-right text-dark"></i>
                     </a>
+                  </Link>
+                 
                 </div>
             </div>
             <div className="col-lg-7 h-auto mb-4">
                 <div className="h-100 bg-white px-4 pt-3">
-                    <h3>Product Name Goes Here</h3>
+                    <h3>{products.name}</h3>
                     <div className="d-flex mb-3">
                         <div className="text-warning mr-2">
                             <small className="fas fa-star"></small>
@@ -54,10 +98,8 @@ function ProductDetails() {
                         </div>
                         <small className="pt-1">(99 Reviews)</small>
                     </div>
-                    <h3 className="font-weight-semi-bold mb-4">$150.00</h3>
-                    <p className="mb-4">Volup erat ipsum diam elitr rebum et dolor. Est nonumy elitr erat diam stet sit
-                        clita ea. Sanc ipsum et, labore clita lorem magna duo dolor no sea
-                        Nonumy</p>
+                    <h3 className="font-weight-semi-bold mb-4">₹{products.price}</h3>
+                    <p className="mb-4">{products.description}</p>
                     <div className=" mb-3">
                         <strong className="text-dark me-3">Sizes:</strong>
                         <form className="d-flex">
@@ -108,22 +150,26 @@ function ProductDetails() {
                             </div>
                         </form>
                     </div>
+                   
                     <div className="d-flex align-items-center mb-4 pt-2">
                         <div className="input-group quantity me-3" style={{width:'130px'}}>
                             <div className="input-group-btn">
-                                <button className="btn btn-warning btn-minus rounded-0">
+                                <button className="btn btn-warning btn-minus rounded-0" onClick={decreaseQty}>
                                     <i className="fa fa-minus"></i>
                                 </button>
                             </div>
-                            <input type="text" className="form-control bg-light border-0 text-center" value="1"/>
+                            <input type="text" name='quantity' value={quantity} className="form-control bg-light border-0 text-center" />
                             <div className="input-group-btn">
-                                <button className="btn btn-warning rounded-0 btn-plus">
+                                <button className="btn btn-warning rounded-0 btn-plus" onClick={increaseQty}>
                                     <i className="fa fa-plus"></i>
                                 </button>
                             </div>
                         </div>
-                        <button className="btn btn-warning px-3"><i className="fa fa-shopping-cart mr-1"></i> Add To
+                        <Link to='/cart'> 
+                        <button onClick={AddToCartHandler} className="btn btn-warning px-3"><i className="fa fa-shopping-cart mr-1"></i> Add To
                             Cart</button>
+                        </Link>
+                       
                     </div>
                     <div className="d-flex pt-2">
                         <strong className="text-dark mr-2">Share on:</strong>
@@ -281,7 +327,7 @@ function ProductDetails() {
             </div>
         </div>
     </div>
-    <div className="container-fluid">
+    {/* <div className="container-fluid">
         <h2 className="text-uppercase mx-xl-5">You may also like
             <hr/>
         </h2>
@@ -355,7 +401,7 @@ function ProductDetails() {
                 </div>
             </div>
         </div>
-    </div>
+    </div> */}
     
     
     </div>

@@ -14,6 +14,9 @@ import Register from "./component/user/Register";
 import Profile from "./component/user/Profile";
 import Dashboard from "./component/admin/Dashboard";
 import Contact from "./component/Contact";
+import Product from "./component/product/Product";
+import Category from "./component/category/Category";
+import MetaData from "./component/layout/MetaData";
 
 function App() {
   return (
@@ -29,6 +32,11 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/product" element={<Product/>} />
+        <Route path="/category" element={<Category/>} />
+        <Route path="/metadata" element={<MetaData/>} />
+
+      
       </Routes>
 
       <Footer />

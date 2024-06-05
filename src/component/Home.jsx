@@ -1,26 +1,40 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-// import ProductDetails from './product/ProductDetails';
+import ProductDetails from './product/ProductDetails';
 import Category from "./category/Category";
-
 import { useDispatch, useSelector } from "react-redux";
 import { getCategory } from "../redux/actions/CategoryAction";
+import { getProducts } from "../redux/actions/ProductAction";
+import Loading from "./layout/Loading";
+import MetaData from "./layout/MetaData";
+import Product from "./product/Product";
 
 function Home() {
-
-  //useDispatch used to call an action 
+  /////////////== useDispatch used to call an action
   const dispatch = useDispatch();
   // console.log(dispatch)
 
-  //useSelector is used to get data
-  const { categories } = useSelector((state) => state.cat)
-    console.log(categories);
+
+
+  ////////////== useSelector is used to get data
+  const { categories, loading } = useSelector((state) => state.cat);
+  // console.log(categories);
+
+
+
+
+  const { products } = useSelector((state) => state.pro);
+  console.log(products)
 
   useEffect(() => {
     dispatch(getCategory());
+    dispatch(getProducts());
   }, [dispatch]);
   return (
+   
     <div>
+       <MetaData title='Home'/> 
+
       {/* carousel start */}
       <div className="container-fluid">
         <div className="row px-xl-5 mb-2">
@@ -131,6 +145,9 @@ function Home() {
           </div>
         </div>
       </div>
+
+
+
       {/* feature start */}
       <div className="container-fluid my-5">
         <div className="row px-xl-5">
@@ -160,197 +177,40 @@ function Home() {
           </div>
         </div>
       </div>
+
+
+
       {/* category start */}
-      <div className="container-fluid">
-        <div className="row px-xl-5 my-3">
-          <h2 className="mb-3">CATEGORIES</h2>
-          <hr />
-          <div className="col-lg-3 col-md-4 col-sm-6 mb-3">
-            <a href="#" className="text-decoration-none ">
-              <div className="cat d-flex align-items-center cl">
-                <div className=" overflow-hidden  wh ">
-                  <img className="img-fluid rd " src="image/cat-1.jpg" alt="" />
-                </div>
-                <div className="ps-3 text-dark">
-                  <h6>Category Name</h6>
-                  <small>100 Products</small>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div className="col-lg-3 col-md-4 col-sm-6 mb-3">
-            <a href="#" className="text-decoration-none">
-              <div className="cat d-flex align-items-center cl ">
-                <div className=" overflow-hidden wh ">
-                  <img className="img-fluid rd " src="image/cat-2.jpg" alt="" />
-                </div>
-                <div className="ps-3 text-dark">
-                  <h6>Category Name</h6>
-                  <small>100 Products</small>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div className="col-lg-3 col-md-4 col-sm-6 mb-3">
-            <a href="#" className="text-decoration-none">
-              <div className="cat d-flex align-items-center cl ">
-                <div className=" overflow-hidden wh ">
-                  <img className="img-fluid rd " src="image/cat-3.jpg" alt="" />
-                </div>
-                <div className="ps-3 text-dark">
-                  <h6>Category Name</h6>
-                  <small>100 Products</small>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div className="col-lg-3 col-md-4 col-sm-6 mb-3">
-            <a href="#" className="text-decoration-none">
-              <div className="cat d-flex align-items-center cl ">
-                <div className=" overflow-hidden wh ">
-                  <img className="img-fluid rd " src="image/cat-4.jpg" alt="" />
-                </div>
-                <div className="ps-3 text-dark">
-                  <h6>Category Name</h6>
-                  <small>100 Products</small>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div className="col-lg-3 col-md-4 col-sm-6 mb-3">
-            <a href="#" className="text-decoration-none">
-              <div className="cat d-flex align-items-center cl ">
-                <div className=" overflow-hidden wh ">
-                  <img className="img-fluid rd " src="image/cat-2.jpg" alt="" />
-                </div>
-                <div className="ps-3 text-dark">
-                  <h6>Category Name</h6>
-                  <small>100 Products</small>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div className="col-lg-3 col-md-4 col-sm-6 mb-3">
-            <a href="#" className="text-decoration-none">
-              <div className="cat d-flex align-items-center cl ">
-                <div className=" overflow-hidden wh">
-                  <img className="img-fluid rd " src="image/cat-4.jpg" alt="" />
-                </div>
-                <div className="ps-3 text-dark">
-                  <h6>Category Name</h6>
-                  <small>100 Products</small>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div className="col-lg-3 col-md-4 col-sm-6 mb-3">
-            <a href="#" className="text-decoration-none">
-              <div className="cat d-flex align-items-center cl ">
-                <div className=" overflow-hidden wh ">
-                  <img className="img-fluid rd " src="image/cat-1.jpg" alt="" />
-                </div>
-                <div className="ps-3 text-dark">
-                  <h6>Category Name</h6>
-                  <small>100 Products</small>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div className="col-lg-3 col-md-4 col-sm-6 mb-3">
-            <a href="#" className="text-decoration-none">
-              <div className="cat d-flex align-items-center cl ">
-                <div className=" overflow-hidden wh ">
-                  <img className="img-fluid rd " src="image/cat-2.jpg" alt="" />
-                </div>
-                <div className="ps-3 text-dark">
-                  <h6>Category Name</h6>
-                  <small>100 Products</small>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div className="col-lg-3 col-md-4 col-sm-6 mb-3">
-            <a href="#" className="text-decoration-none">
-              <div className="cat d-flex align-items-center cl ">
-                <div className=" overflow-hidden wh ">
-                  <img className="img-fluid rd " src="image/cat-1.jpg" alt="" />
-                </div>
-                <div className="ps-3 text-dark">
-                  <h6>Category Name</h6>
-                  <small>100 Products</small>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div className="col-lg-3 col-md-4 col-sm-6 mb-3">
-            <a href="#" className="text-decoration-none">
-              <div className="cat d-flex align-items-center cl">
-                <div className=" overflow-hidden wh ">
-                  <img className="img-fluid rd " src="image/cat-2.jpg" alt="" />
-                </div>
-                <div className="ps-3 text-dark">
-                  <h6>Category Name</h6>
-                  <small>100 Products</small>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div className="col-lg-3 col-md-4 col-sm-6 mb-3">
-            <a href="#" className="text-decoration-none">
-              <div className="cat d-flex align-items-center cl ">
-                <div className=" overflow-hidden wh ">
-                  <img className="img-fluid rd " src="image/cat-4.jpg" alt="" />
-                </div>
-                <div className="ps-3 text-dark">
-                  <h6>Category Name</h6>
-                  <small>100 Products</small>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div className="col-lg-3 col-md-4 col-sm-6 mb-3">
-            <a href="#" className="text-decoration-none">
-              <div className="cat d-flex align-items-center cl ">
-                <div className=" overflow-hidden wh">
-                  <img className="img-fluid rd " src="image/cat-3.jpg" alt="" />
-                </div>
-                <div className="ps-3 text-dark">
-                  <h6>Category Name</h6>
-                  <small>100 Products</small>
-                </div>
-              </div>
-            </a>
-          </div>
+
+      <div className="container-fluid pt-5">
+        <h2 className="mb-3 section-title ">CATEGORIES</h2>
+        <div className="row px-xl-5 pb-3">
+          {loading ? (
+            <Loading />
+          ) : (
+            categories.map((category) => <Category category={category} />)
+          )}
         </div>
       </div>
+
+      {/* category end */}
+
+
+
       {/* product start */}
       <div className="container-fluid">
+      <h2>FEATURED PRODUCTS</h2>
         <div className="row px-xl-5">
-          <h2>FEATURED PRODUCTS</h2>
+        {loading ? (
+            <Loading />
+          ) : (
+            products.map((products) => <Product products={products} />)
+          )}
           <hr />
-          <div className="col-lg-3 col-md-4 col-sm-6 mb-3">
-            <div className="card ">
-              <img className="w-100 efz" src="image/product-1.jpg" alt="" />
-              <div className="card-body bg-light">
-                <h5 className="text-center aa">Product name goes Here</h5>
-                <h5 className="text-center">
-                  $123.00{" "}
-                  <span className="text-danger">
-                    <del>$300</del>
-                  </span>
-                </h5>
-                <div className="d-flex align-items-center justify-content-center mb-1">
-                  <small className="fa fa-star text-warning me-1"></small>
-                  <small className="fa fa-star text-warning me-1"></small>
-                  <small className="fa fa-star text-warning me-1"></small>
-                  <small className="fa fa-star text-warning me-1"></small>
-                  <small className="fa fa-star text-warning me-1"></small>
-                  <small>(99)</small>
-                </div>
-              </div>
-            </div>
           </div>
-          <div className="col-lg-3 col-md-4 col-sm-6 mb-3">
+      </div>
+         
+          {/* <div className="col-lg-3 col-md-4 col-sm-6 mb-3">
             <div className="card ">
               <img className="w-100 efz" src="image/product-2.jpg" alt="" />
               <div className="card-body bg-light">
@@ -503,9 +363,10 @@ function Home() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
+          </div> */}
+     
+      {/* product end */}
+
       {/* offers start */}
       <div className="container-fluid">
         <div className="row px-xl-5 my-3">

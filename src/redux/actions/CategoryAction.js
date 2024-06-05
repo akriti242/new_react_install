@@ -19,7 +19,7 @@ export const getCategory = () => async (dispatch) => {
     dispatch({
       type: ALL_CATEGORY_SUCCESS,
       payload: data,
-    });
+    }); 
   } catch (error) {
     dispatch({
       type: ALL_CATEGORY_FAIL,
