@@ -4,13 +4,15 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { categoriesReducer } from './reducers/CategoryReducer';
 import { productReducer, productDetailsReducer } from './reducers/ProductReducer';
 import { cartReducer } from './reducers/CartReducer';
+import { userRegisterReducer } from './reducers/UserReducer';
 
 
 const reducer = combineReducers({
     cat: categoriesReducer,
     pro : productReducer,
     pDetail: productDetailsReducer,
-    cart : cartReducer
+    cart : cartReducer,
+    auth: userRegisterReducer,
 })
 
 let initializeState = {
